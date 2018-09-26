@@ -68,13 +68,13 @@ def about():
 def signup():
     registerform = RegisterForm()
     searchform = SearchForm()
-    if request.method == 'POST' and registerform.validate():
-        user = User(registerform.username.data, registerform.email.data, registerform.password.data)
-        db.session.add(user)
-        db.session.commit()
-        session['name'] = user.username
-        return redirect(url_for('index'))
-    elif request.method == 'GET':
+    if request.method == 'POST'and registerform.validate():
+            user = User(registerform.username.data, registerform.email.data, registerform.password.data)
+            db.session.add(user)
+            db.session.commit()
+            session['name'] = user.username
+            return redirect(url_for('index'))
+    elif request.method == 'GET' or not registerform.validate():
         return render_template('register.html', form=registerform, searchform=searchform)
 
 

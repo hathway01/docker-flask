@@ -17,14 +17,11 @@ class RegisterForm(FlaskForm):
 
 
     def validate(self):
-        print("works till here")
         if not FlaskForm.validate(self):
-            print("form is not valid")
             return False
         user = User.query.filter_by(email=self.email.data.lower()).first()
-        print("works till here")
         if user:
-            self.email.errors.append("That email is already taken.Try signing in")
+            self.email.errors.append("That email is already taken.Try signing in or use diffrent mail id")
             return False
         else:
             return True
